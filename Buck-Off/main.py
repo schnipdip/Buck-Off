@@ -60,6 +60,9 @@ def inst_pir():
     
     pir.direction = digitalio.Direction.INPUT
     
+
+    #print(pir)
+    #print(pir.direction)
     return(pir, pir.direction)
 
 
@@ -68,9 +71,11 @@ def inst_gps(gps):
         Purpose:
             Instantiate GPS Connection
     '''
+
     gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
     gps.send_command(b"PMTK220,1000")
-
+    gps.send_command(b"PGCMD_ANTENNA")
+    
 
 def matrix_options():
     '''
@@ -80,6 +85,7 @@ def matrix_options():
         Returns:
             matrix, offscreen_canvas
     '''
+    
     options = RGBMatrixOptions()
 
     options.rows = 16
@@ -139,10 +145,10 @@ if __name__ == "__main__":
     
     #Instantiate board and i2c bus
     gps = inst_i2c()
-    
+     
     #Instantiate gps
     inst_gps(gps)
-
+    
     #Instantiate display matrix
     matrix, offscreen_canvas = matrix_options()
     
@@ -167,24 +173,22 @@ if __name__ == "__main__":
         
         pir_value = pir.value
     
-
+        #print(pir_value)
         if pir_value is True:
+
             current = time.monotonic()
+            #print(current)
             if current - last_print >= 1.0:
                 last_print = current
-
                 if gps.has_fix:
-                    
-                    if gps.speed_knots is not None:
-                    
+                    if gps.speed_knots > 0.0:
+                        
                         #convert knots to mph -> 1.151x=y
                         knots = gps.speed_knots
                         mph = round(1.151 * knots,2)
-                    
-                        if mph <= 25:
-                            pass
-                        else:
-
+                        
+                        if mph >= 25:
+                            
                             for count in range(5,0,-1):
                                  graphics.DrawText(matrix, font, 2, 12, red, 'BACK')
 
