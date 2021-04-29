@@ -1,0 +1,11 @@
+
+[Unit]
+Description=Buck Off Service
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python3 /home/pi/Buck-Off/Buck-Off/main.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
