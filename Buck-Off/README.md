@@ -1,5 +1,8 @@
 # Buck-Off
 
+## Install the Adafruit Libraries
+`pip install 
+
 ## Install Systemd Service File
 `mkdir ~/.config/systemd/user`
 
