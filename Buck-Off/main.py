@@ -200,7 +200,8 @@ if __name__ == "__main__":
     
                                  matrix.Clear()
                                  time.sleep(0.1)
-    
+                                
+                                 graphics.DrawText(matrix, font, 10, 11, red, 'UP')
                                  time.sleep(1) # Displays text for 1 second
                                  matrix.Clear()
                                  time.sleep(0.1)
