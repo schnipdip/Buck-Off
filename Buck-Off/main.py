@@ -193,8 +193,8 @@ if __name__ == "__main__":
                         knots = gps.speed_knots
                         mph = round(1.151 * knots,2)
                         
-                        if mph <= 25:
-                            print('hey')    
+                        if mph >= 30:
+                               
                             for count in range(5,0,-1):
                                  graphics.DrawText(matrix, font, 2, 12, red, 'BACK')
 
