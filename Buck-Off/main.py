@@ -1,3 +1,5 @@
+import os
+import subprocess
 import time
 import busio
 import board
@@ -167,6 +169,10 @@ if __name__ == "__main__":
     old_value = pir.value
     
     last_print = time.monotonic()
+    
+    subprocess.run(['sh','/home/pi/Buck-Off/Buck-Off/fix.sh'])
+
+    time.sleep(1)
 
     while True:
         gps.update()
