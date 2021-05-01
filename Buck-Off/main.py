@@ -58,7 +58,7 @@ def inst_pir():
         Returns:
             pir, pir.direction
     '''
-    pir = digitalio.DigitalInOut(board.D22)
+    pir = digitalio.DigitalInOut(board.D19)
     
     pir.direction = digitalio.Direction.INPUT
     
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     
     last_print = time.monotonic()
     
-    subprocess.run(['sh','/home/pi/Buck-Off/Buck-Off/fix.sh'])
+    #subprocess.run(['sh','/home/pi/Buck-Off/Buck-Off/fix.sh'])
 
     time.sleep(1)
 
@@ -193,7 +193,7 @@ if __name__ == "__main__":
                         knots = gps.speed_knots
                         mph = round(1.151 * knots,2)
                         
-                        if mph >= 30:
+                        if mph < 30:
                                
                             for count in range(5,0,-1):
                                  graphics.DrawText(matrix, font, 2, 12, red, 'BACK')
